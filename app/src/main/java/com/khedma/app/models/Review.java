@@ -31,4 +31,20 @@ public class Review {
     public String getComment() {
         return comment;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDemandId(String demandId) {
+        this.demandId = demandId;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

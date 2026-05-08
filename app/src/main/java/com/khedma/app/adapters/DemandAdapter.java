@@ -6,20 +6,40 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedma.app.R;
 import com.khedma.app.models.Demand;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandViewHolder> {
-    private List<Demand> demands = new ArrayList<>();
+public class DemandAdapter extends ListAdapter<Demand, DemandAdapter.DemandViewHolder> {
+    public DemandAdapter() {
+        super(DIFF_CALLBACK);
+    }
+
+    private static final DiffUtil.ItemCallback<Demand> DIFF_CALLBACK = new DiffUtil.ItemCallback<>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Demand oldItem, @NonNull Demand newItem) {
+            if (oldItem.getId() == null || newItem.getId() == null) {
+                return oldItem == newItem;
+            }
+            return oldItem.getId().equals(newItem.getId());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Demand oldItem, @NonNull Demand newItem) {
+            return String.valueOf(oldItem.getTitle()).equals(String.valueOf(newItem.getTitle()))
+                    && String.valueOf(oldItem.getStatus()).equals(String.valueOf(newItem.getStatus()));
+        }
+    };
 
     public void submitList(List<Demand> items) {
-        demands = items;
-        notifyDataSetChanged();
+        super.submitList(items == null ? Collections.emptyList() : new ArrayList<>(items));
     }
 
     @NonNull
@@ -31,12 +51,7 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
 
     @Override
     public void onBindViewHolder(@NonNull DemandViewHolder holder, int position) {
-        holder.bind(demands.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return demands.size();
+        holder.bind(getItem(position));
     }
 
     static class DemandViewHolder extends RecyclerView.ViewHolder {
