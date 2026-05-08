@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Khedma</string>
+    <string name="auth_title">Bienvenue sur Khedma</string>
+    <string name="full_name">Nom complet</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="register">Inscription</string>
+    <string name="logout">Déconnexion</string>
+    <string name="client_home_title">Accueil client</string>
+    <string name="client_profile_title">Profil client</string>
+    <string name="provider_home_title">Accueil prestataire</string>
+    <string name="provider_profile_title">Profil prestataire</string>
+    <string-array name="roles">
+        <item>client</item>
+        <item>provider</item>
+    </string-array>
+</resources>

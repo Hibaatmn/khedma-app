@@ -1,0 +1,2 @@
+rootProject.name = "khedma-app"
+include ':app'
